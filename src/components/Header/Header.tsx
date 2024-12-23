@@ -15,7 +15,7 @@ import { useState, MouseEvent } from 'react';
 
 const pages = ['Residents', 'Businesses', 'Visitors', 'Jobs', 'Events'];
 
-function ResponsiveAppBar() {
+function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
@@ -27,7 +27,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className='absolute left-0 top-0 z-10'>
       <Container maxWidth="xl" className='bg-background text-primary'>
         <Toolbar disableGutters>
           <FilterDramaIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -117,4 +117,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Header;

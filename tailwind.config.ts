@@ -16,6 +16,10 @@ export default {
         text: "var(--text)",
       },
     },
+    screens: {
+      tablet: "900px",
+      tablet2: "600px",
+    }
   },
   plugins: [],
 } satisfies Config;
