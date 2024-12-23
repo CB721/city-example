@@ -27,7 +27,7 @@ function Header() {
   };
 
   return (
-    <AppBar position="static" className='absolute left-0 top-0 z-10'>
+    <AppBar position="static" className='absolute left-0 top-0 z-10 bg-red' sx={{backgroundColor: "var(--background)"}}>
       <Container maxWidth="xl" className='bg-background text-primary'>
         <Toolbar disableGutters>
           <FilterDramaIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

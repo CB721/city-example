@@ -1,10 +1,14 @@
 
 import Header from '../components/Header/Header';
 import Carousel from '@/components/Carousel/Carousel';
+import CardRow from '@/components/CardRow/CardRow';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 export default function Home() {
   return (
-    <div className='relative'>
+    <div>
       <Header />
       <Carousel
         images={[
@@ -35,9 +39,29 @@ export default function Home() {
             layout: 'fill',
           },
         ]}
-      >
-
-      </Carousel>
+      />
+      <CardRow
+        items={[
+          {
+            id: '1',
+            title: 'City Directory',
+            description: "Contacts for the City's officials & departments",
+            icon: <ChatBubbleOutlineIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
+          },
+          {
+            id: '2',
+            title: 'Neighborhood Info',
+            description: 'Find your local trash pickup day, utilities, and more',
+            icon: <MapsHomeWorkIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
+          },
+          {
+            id: '3',
+            title: 'Meetings & Agendas',
+            description: 'City Council and Committee meetings & agendas',
+            icon: <CalendarMonthIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
+          },
+        ]}
+      />
     </div>
   );
 }
