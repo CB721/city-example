@@ -2,25 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.first-color { 
-	background: #e7eaf6; 
-}
-	
-.second-color { 
-	background: #a2a8d3; 
-}
-
-.third-color { 
-	background: #38598b; 
+:root {
+  --primary: #e7eaf6;
+  --secondary: #a2a8d3;
+  --tertiary: #38598b;
+  --background: #113f67;
+  --text: #2d2f31;
 }
 
-.fourth-color { 
-	background: #113f67; 
-}
 
 body {
-  color: #2d2f31;;
-  background: #e7eaf6;
+  color: var(--text);
+  background: var(--primary);
   font-family: Arial, Helvetica, sans-serif;
 }
