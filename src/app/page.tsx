@@ -8,6 +8,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PanelRow from '@/components/PanelRow/PanelRow';
 import News from '@/components/News/News';
 import { Button } from '@mui/material';
+import Footer from '@/components/Footer/Footer';
 
 export default function Home() {
   return (
@@ -113,8 +114,9 @@ export default function Home() {
         }}
         header="Volunteer Opportunities"
         description="Cloud City is seeking passionate volunteers to support our local food bank and help provide essential resources to those in need. By lending your time, you can make a meaningful difference in the lives of families and individuals facing food insecurity in our community. Join us today and be part of a movement that brings hope and nourishment to those who need it most."
-        callToAction={<Button sx={{background: "var(--background)"}} variant="contained">Join Us Today!</Button>}
+        callToAction={<Button sx={{background: "var(--background)"}} variant="contained">Help Your City Today!</Button>}
       />
+      <Footer />
     </div>
   );
 }
