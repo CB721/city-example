@@ -19,7 +19,7 @@ export interface NewsProps {
 const opts: YouTubeProps['opts'] = {
   playerVars: {
     // https://developers.google.com/youtube/player_parameters
-    autoplay: 1,
+    autoplay: 0,
   },
 };
 
@@ -30,8 +30,8 @@ export default function News({ news }: NewsProps) {
 
   useInterval(() => {
     setStartIndex((prevIndex) => (prevIndex + 1) % news.length);
-    let beginning = news.slice(startIndex);
-    let end = news.slice(0, startIndex);
+    const beginning = news.slice(startIndex);
+    const end = news.slice(0, startIndex);
     setCurrNewsOptions([...beginning, ...end].slice(0, 3));
   }, 7250);
 
