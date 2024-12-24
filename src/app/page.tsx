@@ -6,6 +6,7 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PanelRow from '@/components/PanelRow/PanelRow';
+import News from '@/components/News/News';
 import { Button } from '@mui/material';
 
 export default function Home() {
@@ -61,6 +62,46 @@ export default function Home() {
             title: 'Meetings & Agendas',
             description: 'City Council and Committee meetings & agendas',
             icon: <CalendarMonthIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
+          },
+        ]}
+      />
+      <News
+        news={[
+          {
+            thumbnail: {
+              src: '/images/splashImages/traffic.jpg',
+              alt: 'Traffic',
+              layout: 'fill',
+            },
+            title: 'Traffic update',
+            videoId: '4pSkeZ_afnk'
+          },
+          {
+            thumbnail: {
+              src: '/images/splashImages/animal-crossing.jpg',
+              alt: 'New animals at local zoo',
+              layout: 'fill',
+            },
+            title: 'New animals at local zoo',
+            videoId: 'oRDRfikj2z8'
+          },
+          {
+            thumbnail: {
+              src: '/images/splashImages/rain.jpg',
+              alt: 'Weather',
+              layout: 'fill',
+            },
+            title: 'Weather News',
+            videoId: 'Z_XWw_E0FWs'
+          },
+          {
+            thumbnail: {
+              src: '/images/splashImages/speech.jpg',
+              alt: 'Mayor speech',
+              layout: 'fill',
+            },
+            title: 'Mayor speaks on supporting local children',
+            videoId: 'Yp5KDg6mx_Q'
           },
         ]}
       />

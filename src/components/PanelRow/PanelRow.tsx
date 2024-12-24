@@ -10,7 +10,7 @@ export interface PanelRowProps {
 
 function PanelRow({ image, header, description, callToAction }: PanelRowProps) {
   return (
-    <div className='tablet:flex block justify-start tablet:h-auto h-full tablet:mt-[-48px] mt-0 bg-white'>
+    <div className='tablet:flex block justify-start tablet:h-auto h-full bg-white'>
       <div className='tablet:w-3/4 w-full tablet:h-auto h-[50vh] relative'>
         <Image {...image} className='object-cover' />
       </div>
