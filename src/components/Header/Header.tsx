@@ -35,7 +35,7 @@ function Header() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="#good-work-here"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
