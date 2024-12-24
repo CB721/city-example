@@ -12,7 +12,7 @@ function PanelRow({ image, header, description, callToAction }: PanelRowProps) {
   return (
     <div className='tablet:flex block justify-start tablet:h-auto h-full bg-white'>
       <div className='tablet:w-3/4 w-full tablet:h-auto h-[50vh] relative'>
-        <Image {...image} className='object-cover' />
+        <Image alt='' {...image} className='object-cover' />
       </div>
       <div className='tablet:w-1/4 w-full py-4'>
         <Container maxWidth="xl">

@@ -11,12 +11,17 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import FilterDramaIcon from '@mui/icons-material/FilterDrama';
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useEffect } from 'react';
 
 const pages = ['Residents', 'Businesses', 'Visitors', 'Jobs', 'Events'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -26,8 +31,14 @@ function Header() {
     setAnchorElNav(null);
   };
 
+  if (!isClient) {
+    return (
+      <div className='bg-background w-full tablet:h-[68.5px] tablet2:h-16 h-14' />
+    )
+  };
+
   return (
-    <AppBar position="static" className='absolute left-0 top-0 z-10 bg-red' sx={{backgroundColor: "var(--background)"}}>
+    <AppBar position="static" className='absolute left-0 top-0 z-10 bg-red' sx={{ backgroundColor: "var(--background)" }}>
       <Container maxWidth="xl" className='bg-background text-primary'>
         <Toolbar disableGutters>
           <FilterDramaIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -77,7 +88,7 @@ function Header() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                  <Typography sx={{ textAlign: 'center', color: 'var(--primary)' }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -106,7 +117,7 @@ function Header() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'var(--primary)', display: 'block' }}
               >
                 {page}
               </Button>
