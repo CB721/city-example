@@ -39,13 +39,13 @@ function Carousel({ images }: CarouselProps) {
           />
           <div className='relative'>
             <Input
-              placeholder="Search"
+              placeholder="Search your city"
               variant="soft"
               endDecorator={<SearchIcon />}
               onFocus={() => setIsSearching(true)}
               onBlur={() => setIsSearching(false)}
               className={isSearching ? 'opacity-100' : 'opacity-85'}
-              sx={{ backgroundColor: "var(--primary)", outline: "var(--tertiary)" }}
+              sx={{ backgroundColor: "var(--primary)", outline: "var(--tertiary)", height: '48px', width: '300px', borderRadius: '0' }}
             />
           </div>
         </div>

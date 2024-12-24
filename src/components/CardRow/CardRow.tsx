@@ -13,12 +13,14 @@ export interface CardRowItem {
 
 export interface CardRowProps {
   items: CardRowItem[];
+  title?: string;
 }
 
-export default function CardRow({ items }: CardRowProps) {
+export default function CardRow({ items, title }: CardRowProps) {
   return (
     <Container maxWidth="xl">
       <Box sx={{ flexGrow: 1, marginTop: 12, marginBottom: 12 }}>
+        {title && <h2 className='text-2xl font-bold text-center text-tertiary mb-4'>{title}</h2>}
         <Grid container justifyContent="space-between">
           {items.map((item) => (
             <Grid key={item.id} xs={12} sm={3.5}>
