@@ -26,21 +26,25 @@ export default function Home() {
             src: '/images/splashImages/aerial-city.jpg',
             alt: 'Aerial City',
             layout: 'fill',
+            priority: true,
           },
           {
             src: '/images/splashImages/lake.jpg',
             alt: 'Lake',
             layout: 'fill',
+            priority: true,
           },
           {
             src: '/images/splashImages/mountains.jpg',
             alt: 'Mountains',
             layout: 'fill',
+            priority: true,
           },
           {
             src: '/images/splashImages/city-sunset.jpg',
             alt: 'City Sunset',
             layout: 'fill',
+            priority: true,
           },
         ]}
       />
