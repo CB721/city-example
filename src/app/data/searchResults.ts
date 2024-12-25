@@ -343,52 +343,52 @@ export function retrieveSearchResults(query: string): SearchResult[] {
     case 1:
       results = searchResults.filter(
         (result) =>
-          result.title.toLowerCase().includes(terms[0].toLowerCase()) ||
-          result.description.toLowerCase().includes(terms[0].toLowerCase())
+          result.title?.toLowerCase().includes(terms[0]?.toLowerCase()) ||
+          result.description?.toLowerCase().includes(terms[0]?.toLowerCase())
       );
     case 2:
       results = searchResults.filter(
         (result) =>
-          (result.title.toLowerCase().includes(terms[0].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[1].toLowerCase())) ||
-          (result.description.toLowerCase().includes(terms[0].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[1].toLowerCase()))
+          (result.title?.toLowerCase().includes(terms[0]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[1]?.toLowerCase())) ||
+          (result.description?.toLowerCase().includes(terms[0]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[1]?.toLowerCase()))
       );
     case 3:
       results = searchResults.filter(
         (result) =>
-          (result.title.toLowerCase().includes(terms[0].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[1].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[2].toLowerCase())) ||
-          (result.description.toLowerCase().includes(terms[0].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[1].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[2].toLowerCase()))
+          (result.title?.toLowerCase().includes(terms[0]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[1]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[2]?.toLowerCase())) ||
+          (result.description?.toLowerCase().includes(terms[0]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[1]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[2]?.toLowerCase()))
       );
     case 4:
       results = searchResults.filter(
         (result) =>
-          (result.title.toLowerCase().includes(terms[0].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[1].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[2].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[3].toLowerCase())) ||
-          (result.description.toLowerCase().includes(terms[0].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[1].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[2].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[3].toLowerCase()))
+          (result.title?.toLowerCase().includes(terms[0]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[1]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[2]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[3]?.toLowerCase())) ||
+          (result.description?.toLowerCase().includes(terms[0]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[1]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[2]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[3]?.toLowerCase()))
       );
     case 5:
       results = searchResults.filter(
         (result) =>
-          (result.title.toLowerCase().includes(terms[0].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[1].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[2].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[3].toLowerCase()) &&
-            result.title.toLowerCase().includes(terms[4].toLowerCase())) ||
-          (result.description.toLowerCase().includes(terms[0].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[1].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[2].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[3].toLowerCase()) &&
-            result.description.toLowerCase().includes(terms[4].toLowerCase()))
+          (result.title?.toLowerCase().includes(terms[0]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[1]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[2]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[3]?.toLowerCase()) &&
+            result.title?.toLowerCase().includes(terms[4]?.toLowerCase())) ||
+          (result.description?.toLowerCase().includes(terms[0]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[1]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[2]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[3]?.toLowerCase()) &&
+            result.description?.toLowerCase().includes(terms[4]?.toLowerCase()))
       );
     default:
       results = [];
@@ -399,10 +399,10 @@ export function retrieveSearchResults(query: string): SearchResult[] {
 
   const randomResults = searchResults.filter((result) => {
     if (
-      result.description.toLowerCase().includes(includeTerm) &&
-      result.title.toLowerCase().includes(includeTerm) &&
-      !result.description.toLowerCase().includes(excludeTerm) &&
-      !result.title.toLowerCase().includes(excludeTerm)
+      result.description?.toLowerCase().includes(includeTerm) &&
+      result.title?.toLowerCase().includes(includeTerm) &&
+      !result.description?.toLowerCase().includes(excludeTerm) &&
+      !result.title?.toLowerCase().includes(excludeTerm)
     ) {
       return true;
     }
@@ -420,7 +420,7 @@ export function retrieveSearchResults(query: string): SearchResult[] {
   return results.map((result) => {
     // replace each term in the title and description with the query - it goes [term], [term2], [term3], etc.
     let title = result.title.replace(`[term]`, terms[0]);
-    let description = result.description.replace(`[term]`, terms[0].toLowerCase());
+    let description = result.description.replace(`[term]`, terms[0]?.toLowerCase());
     for (let i = 1; i <= terms.length; i++) {
       title = title.replace(`[term${i + 1}]`, terms[i]);
       description = description.replace(`[term${i + 1}]`, terms[i]?.toLowerCase());
