@@ -10,10 +10,11 @@ import News from '@/components/News/News';
 import { Button } from '@mui/material';
 import Footer from '@/components/Footer/Footer';
 import { useSearch } from '@/contexts/SearchContext';
+import SearchResults from '@/components/SearchResults/SearchResults';
 
 export default function Home() {
-  const { resultsReady } = useSearch();
-
+  const { results, resultsReady } = useSearch();
+  console.log('results', results);
   return (
     <div>
       <Carousel
@@ -51,9 +52,7 @@ export default function Home() {
         ]}
       />
       {resultsReady ? (
-        <div>
-
-        </div>
+        <SearchResults results={results} />
       ) : (
         <>
           <CardRow
