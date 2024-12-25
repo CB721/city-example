@@ -1,7 +1,7 @@
 'use client'
 
 import Image, { ImageProps } from 'next/legacy/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import YouTube, { YouTubeProps } from 'react-youtube';
 import Container from '@mui/material/Container';
 import useInterval from '@/hooks/useInterval';
@@ -26,13 +26,19 @@ const opts: YouTubeProps['opts'] = {
 export default function News({ news }: NewsProps) {
   const [startIndex, setStartIndex] = useState(0);
   const [currNewsOptions, setCurrNewsOptions] = useState<News[]>([]);
+  const [isPaused, setIsPaused] = useState(false);
 
-
-  useInterval(() => {
-    setStartIndex((prevIndex) => (prevIndex + 1) % news.length);
+  useEffect(() => {
     const beginning = news.slice(startIndex);
     const end = news.slice(0, startIndex);
     setCurrNewsOptions([...beginning, ...end].slice(0, 3));
+  }, [news, startIndex]);
+
+  useInterval(() => {
+    if (isPaused) {
+      return;
+    }
+    setStartIndex((prevIndex) => (prevIndex + 1) % news.length);
   }, 7250);
 
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
@@ -47,7 +53,15 @@ export default function News({ news }: NewsProps) {
         <div className='tablet:flex block justify-start tablet:h-auto h-full'>
           <div className='tablet:w-1/2 w-full py-4'>
             {currNewsOptions.map((newsItem) => (
-              <div key={newsItem.title} className='bg-secondary mb-2 rounded flex justify-between items-center cursor-pointer'>
+              <div 
+              key={newsItem.title} 
+              className='bg-secondary mb-2 rounded flex justify-between items-center cursor-pointer'
+              onClick={() => {
+                setIsPaused(true);
+                const newStartIndex = news.findIndex((item) => item.title === newsItem.title);
+                setStartIndex(newStartIndex);
+              }}
+              >
                 <h3 className='text-base max-w-[75%] max-h-24 font-bold text-tertiary px-4 truncate'>{newsItem.title}</h3>
                 <div className='w-1/4 h-24 relative'>
                   <Image alt='' {...newsItem.thumbnail} className='object-cover w-1/4 h-24 rounded' />
