@@ -5,6 +5,9 @@ import CardRow from '@/components/CardRow/CardRow';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
+import AnchorIcon from '@mui/icons-material/Anchor';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
 import PanelRow from '@/components/PanelRow/PanelRow';
 import News from '@/components/News/News';
 import { Button } from '@mui/material';
@@ -14,7 +17,14 @@ import SearchResults from '@/components/SearchResults/SearchResults';
 
 export default function Home() {
   const { results, resultsReady } = useSearch();
-  
+  const today = new Date();
+  const date3DaysFromNow = new Date(today).setDate(today.getDate() + 3);
+  const date5DaysFromNow = new Date(today).setDate(today.getDate() + 5);
+  const date7DaysFromNow = new Date(today).setDate(today.getDate() + 7);
+
+  const fullDate3DaysFromNow = new Date(date3DaysFromNow).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  const fullDate5DaysFromNow = new Date(date5DaysFromNow).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  const fullDate7DaysFromNow = new Date(date7DaysFromNow).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
   return (
     <div>
       <Carousel
@@ -130,22 +140,22 @@ export default function Home() {
           <CardRow
             items={[
               {
-                id: '1',
-                title: 'City Directory',
-                description: "Contacts for the City's officials & departments",
-                icon: <ChatBubbleOutlineIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
+                id: '4',
+                title: `Special Olympics - ${fullDate3DaysFromNow}`,
+                description: "Cloud City is proud to host the Special Olympics this year. Join us for a day of fun and celebration!",
+                icon: <AccessibleForwardIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
               },
               {
-                id: '2',
-                title: 'Neighborhood Info',
-                description: 'Find your local trash pickup day, utilities, and more',
-                icon: <MapsHomeWorkIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
+                id: '5',
+                title: `Sail the Harbor - ${fullDate7DaysFromNow}`,
+                description: 'Come mingle with the locals and enjoy a day of sailing on the harbor.',
+                icon: <AnchorIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
               },
               {
-                id: '3',
-                title: 'Meetings & Agendas',
-                description: 'City Council and Committee meetings & agendas',
-                icon: <CalendarMonthIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
+                id: '6',
+                title: `Food Bank Support Day - ${fullDate5DaysFromNow}`,
+                description: 'Join community members in supporting our local food banks.',
+                icon: <FoodBankIcon sx={{ fill: "var(--background)", width: '2rem', height: '2rem' }} />,
               },
             ]}
             title='Community Events'
