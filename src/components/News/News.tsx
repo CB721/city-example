@@ -16,23 +16,27 @@ export interface NewsProps {
   news: News[];
 }
 
-const opts: YouTubeProps['opts'] = {
-  playerVars: {
-    // https://developers.google.com/youtube/player_parameters
-    autoplay: 0,
-  },
-};
-
 export default function News({ news }: NewsProps) {
   const [startIndex, setStartIndex] = useState(0);
   const [currNewsOptions, setCurrNewsOptions] = useState<News[]>([]);
   const [isPaused, setIsPaused] = useState(false);
+  const [videoSize, setVideoSize] = useState({ width: 640, height: 390 });
 
   useEffect(() => {
     const beginning = news.slice(startIndex);
     const end = news.slice(0, startIndex);
     setCurrNewsOptions([...beginning, ...end].slice(0, 3));
   }, [news, startIndex]);
+
+  useEffect(() => {
+    if (!window) {
+      return;
+    } else {
+      if (window.innerWidth <700) {
+        setVideoSize({ width: 320, height: 195 });
+      }
+    }
+  }, [])
 
   useInterval(() => {
     if (isPaused) {
@@ -53,14 +57,14 @@ export default function News({ news }: NewsProps) {
         <div className='tablet:flex block justify-start tablet:h-auto h-full'>
           <div className='tablet:w-1/2 w-full py-4'>
             {currNewsOptions.map((newsItem) => (
-              <div 
-              key={newsItem.title} 
-              className='bg-secondary mb-2 rounded flex justify-between items-center cursor-pointer'
-              onClick={() => {
-                setIsPaused(true);
-                const newStartIndex = news.findIndex((item) => item.title === newsItem.title);
-                setStartIndex(newStartIndex);
-              }}
+              <div
+                key={newsItem.title}
+                className='bg-secondary mb-2 rounded flex justify-between items-center cursor-pointer'
+                onClick={() => {
+                  setIsPaused(true);
+                  const newStartIndex = news.findIndex((item) => item.title === newsItem.title);
+                  setStartIndex(newStartIndex);
+                }}
               >
                 <h3 className='text-base max-w-[75%] max-h-24 font-bold text-tertiary px-4 truncate'>{newsItem.title}</h3>
                 <div className='w-1/4 h-24 relative'>
@@ -74,7 +78,13 @@ export default function News({ news }: NewsProps) {
           </div>
           <div className='tablet:w-3/4 w-full flex justify-end tablet:h-auto h-[50vh] relative pl-0 tablet2:pl-4'>
             {currNewsOptions.length > 0 && (
-              <YouTube videoId={currNewsOptions[0].videoId} opts={opts} onReady={onPlayerReady} />
+              <YouTube videoId={currNewsOptions[0].videoId} opts={{
+                height: videoSize.height,
+                width: videoSize.width,
+                playerVars: {
+                  autoplay: 1,
+                }
+              }} onReady={onPlayerReady} />
             )}
           </div>
         </div>
