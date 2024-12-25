@@ -336,8 +336,9 @@ export const searchResults: SearchResult[] = [
 
 export function retrieveSearchResults(query: string): SearchResult[] {
   const terms = query.trim().split(" ");
-  console.log("terms: ", terms, terms.length);
+  
   let results: SearchResult[] = [];
+
   switch (terms.length) {
     case 1:
       results = searchResults.filter(
@@ -392,12 +393,9 @@ export function retrieveSearchResults(query: string): SearchResult[] {
     default:
       results = [];
   }
-//   console.log("results: ", results, results.length);
 
   const includeTerm = `[term${terms.length > 1 ? terms.length : ""}]`;
   const excludeTerm = `[term${terms.length + 1}]`;
-  console.log("includeTerm: ", includeTerm);
-  console.log("excludeTerm: ", excludeTerm);
 
   const randomResults = searchResults.filter((result) => {
     if (
@@ -406,17 +404,12 @@ export function retrieveSearchResults(query: string): SearchResult[] {
       !result.description.toLowerCase().includes(excludeTerm) &&
       !result.title.toLowerCase().includes(excludeTerm)
     ) {
-      console.log("--------------");
-      console.log("result: ", result);
       return true;
     }
     return false;
   });
 
-  console.log("randomResults: ", randomResults, randomResults.length);
-
   const randomAmount = Math.floor(Math.random() * 10) + 10;
-  console.log("randomAmount: ", randomAmount);
 
   while (results.length < randomAmount && randomResults.length > 0) {
     const randomIndex = Math.floor(Math.random() * randomResults.length);
@@ -424,15 +417,13 @@ export function retrieveSearchResults(query: string): SearchResult[] {
     results.push(randomResult);
   }
 
-  console.log("results: ", results, results.length);
-
   return results.map((result) => {
     // replace each term in the title and description with the query - it goes [term], [term2], [term3], etc.
     let title = result.title.replace(`[term]`, terms[0]);
-    let description = result.description.replace(`[term]`, terms[0]);
+    let description = result.description.replace(`[term]`, terms[0].toLowerCase());
     for (let i = 1; i <= terms.length; i++) {
       title = title.replace(`[term${i + 1}]`, terms[i]);
-      description = description.replace(`[term${i + 1}]`, terms[i]);
+      description = description.replace(`[term${i + 1}]`, terms[i]?.toLowerCase());
     }
 
     return {

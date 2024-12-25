@@ -50,15 +50,15 @@ export default function News({ news }: NewsProps) {
               <div key={newsItem.title} className='bg-secondary mb-2 rounded flex justify-between items-center cursor-pointer'>
                 <h3 className='text-base max-w-[75%] max-h-24 font-bold text-tertiary px-4 truncate'>{newsItem.title}</h3>
                 <div className='w-1/4 h-24 relative'>
-                  <Image {...newsItem.thumbnail} className='object-cover w-1/4 h-24 rounded' />
+                  <Image alt='' {...newsItem.thumbnail} className='object-cover w-1/4 h-24 rounded' />
                 </div>
               </div>
             ))}
             {news.length > 3 && (
-              <button className='text-primary font-bold text-lg mt-4 w-full text-right text-sm'>View More</button>
+              <button className='text-primary font-bold mt-4 w-full text-right text-sm'>View More</button>
             )}
           </div>
-          <div className='tablet:w-3/4 w-full flex justify-end tablet:h-auto h-[50vh] relative'>
+          <div className='tablet:w-3/4 w-full flex justify-end tablet:h-auto h-[50vh] relative pl-0 tablet2:pl-4'>
             {currNewsOptions.length > 0 && (
               <YouTube videoId={currNewsOptions[0].videoId} opts={opts} onReady={onPlayerReady} />
             )}

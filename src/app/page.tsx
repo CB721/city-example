@@ -14,7 +14,7 @@ import SearchResults from '@/components/SearchResults/SearchResults';
 
 export default function Home() {
   const { results, resultsReady } = useSearch();
-  console.log('results', results);
+  
   return (
     <div>
       <Carousel
