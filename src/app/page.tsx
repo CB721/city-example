@@ -16,7 +16,7 @@ import { useSearch } from '@/contexts/SearchContext';
 import SearchResults from '@/components/SearchResults/SearchResults';
 
 export default function Home() {
-  const { results, resultsReady } = useSearch();
+  const { results, resultsReady, value } = useSearch();
   const today = new Date();
   const date3DaysFromNow = new Date(today).setDate(today.getDate() + 3);
   const date5DaysFromNow = new Date(today).setDate(today.getDate() + 5);
@@ -60,6 +60,7 @@ export default function Home() {
             priority: true,
           },
         ]}
+        disableSearch={!!value && value.length > 3}
       />
       {resultsReady ? (
         <SearchResults results={results} />

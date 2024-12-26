@@ -82,7 +82,7 @@ export default function News({ news }: NewsProps) {
                 height: videoSize.height,
                 width: videoSize.width,
                 playerVars: {
-                  autoplay: 1,
+                  autoplay: 0,
                 }
               }} onReady={onPlayerReady} />
             )}

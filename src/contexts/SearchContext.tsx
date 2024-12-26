@@ -2,6 +2,7 @@
 
 import { createContext, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import { retrieveSearchResults, SearchResult } from "@/app/data/searchResults";
+import fetchQTechResp, { QTechAiResponse } from "@/services/ai";
 export interface SearchContextType {
   value: string | null;
   onInputChange: (value: string) => void;
@@ -16,10 +17,31 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [cachedResults, setCachedResults] = useState<{ [key: string]: SearchResult[] }>({});
   const [resultsReady, setResultsReady] = useState(false);
+  const [aiCache, setAiCache] = useState<{ [key: string]: QTechAiResponse }>({});
 
   const onInputChange = useCallback((val?: string) => {
     setValue(val ? val : null);
   }, []);
+
+  const getAiResp = useCallback((query: string, searchResults: SearchResult[]) => {
+    if (aiCache[query]) {
+      return aiCache[query];
+    }
+
+    fetchQTechResp(searchResults)
+      .then((response) => {
+        setAiCache({ ...aiCache, [query]: response });
+      })
+      .catch((err) => {
+        setAiCache({ ...aiCache, [query]: { output: '', timeToComplete: 0, error: err } });
+      });
+  }, [aiCache])
+
+  useEffect(() => {
+    if (results.length > 0) {
+      getAiResp(value!, results);
+    }
+  }, [getAiResp, results, value]);
 
   useEffect(() => {
     if (value && value.length > 3) {

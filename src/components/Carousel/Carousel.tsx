@@ -8,9 +8,10 @@ import Search from '../Search/Search';
 
 export interface CarouselProps {
   images: ImageProps[];
+  disableSearch?: boolean;
 }
 
-function Carousel({ images }: CarouselProps) {
+function Carousel({ images, disableSearch }: CarouselProps) {
   const [carouselImageClassName, setCarouselImageClassName] = useState(styles.fadeIn);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -36,7 +37,11 @@ function Carousel({ images }: CarouselProps) {
             {...images[currentImageIndex]}
             className={`h-96 w-full object-cover ${carouselImageClassName}`}
           />
-          <Search />
+          {!disableSearch ? (
+            <Search key='valid' autoFocus />
+          ) : (
+            <Search key='invalid' autoFocus={false} disabled={disableSearch} />
+          )}
         </div>
       </div>
     </div>
