@@ -8,6 +8,9 @@ export interface SearchContextType {
   onInputChange: (value: string) => void;
   results: SearchResult[];
   resultsReady: boolean;
+  aiCache: {
+    [key: string]: QTechAiResponse;
+  };
 }
 
 export const SearchContext = createContext<SearchContextType>(null!);
@@ -24,16 +27,17 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const getAiResp = useCallback((query: string, searchResults: SearchResult[]) => {
-    if (aiCache[query]) {
-      return aiCache[query];
+    const key = query.trim().toLowerCase();
+    if (aiCache[key]) {
+      return aiCache[key];
     }
 
     fetchQTechResp(searchResults)
       .then((response) => {
-        setAiCache({ ...aiCache, [query]: response });
+        setAiCache({ ...aiCache, [key]: response });
       })
       .catch((err) => {
-        setAiCache({ ...aiCache, [query]: { output: '', timeToComplete: 0, error: err } });
+        setAiCache({ ...aiCache, [key]: { output: '', timeToComplete: 0, error: err } });
       });
   }, [aiCache])
 
@@ -65,6 +69,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     onInputChange,
     results,
     resultsReady,
+    aiCache
   }
 
   return (
