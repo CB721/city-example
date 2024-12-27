@@ -51,7 +51,7 @@ export default function News({ news }: NewsProps) {
   }
 
   return (
-    <Container maxWidth="xl" className='bg-white mb-12 tablet:mt-[-48px] mt-0'>
+    <Container maxWidth="xl" className='bg-white tablet:mt-[-48px] mt-0'>
       <div className='py-12'>
         <h2 className='text-2xl font-bold text-center text-tertiary mb-4'>City News</h2>
         <div className='tablet:flex block justify-start tablet:h-auto h-full'>

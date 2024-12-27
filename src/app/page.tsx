@@ -87,46 +87,48 @@ export default function Home() {
               },
             ]}
           />
-          <News
-            news={[
-              {
-                thumbnail: {
-                  src: '/images/splashImages/traffic.jpg',
-                  alt: 'Traffic',
-                  layout: 'fill',
+          <div className='mb-12'>
+            <News
+              news={[
+                {
+                  thumbnail: {
+                    src: '/images/splashImages/traffic.jpg',
+                    alt: 'Traffic',
+                    layout: 'fill',
+                  },
+                  title: 'Traffic update',
+                  videoId: '4pSkeZ_afnk'
                 },
-                title: 'Traffic update',
-                videoId: '4pSkeZ_afnk'
-              },
-              {
-                thumbnail: {
-                  src: '/images/splashImages/animal-crossing.jpg',
-                  alt: 'New animals at local zoo',
-                  layout: 'fill',
+                {
+                  thumbnail: {
+                    src: '/images/splashImages/animal-crossing.jpg',
+                    alt: 'New animals at local zoo',
+                    layout: 'fill',
+                  },
+                  title: 'New animals at local zoo',
+                  videoId: 'oRDRfikj2z8'
                 },
-                title: 'New animals at local zoo',
-                videoId: 'oRDRfikj2z8'
-              },
-              {
-                thumbnail: {
-                  src: '/images/splashImages/rain.jpg',
-                  alt: 'Weather',
-                  layout: 'fill',
+                {
+                  thumbnail: {
+                    src: '/images/splashImages/rain.jpg',
+                    alt: 'Weather',
+                    layout: 'fill',
+                  },
+                  title: 'Weather News',
+                  videoId: 'Z_XWw_E0FWs'
                 },
-                title: 'Weather News',
-                videoId: 'Z_XWw_E0FWs'
-              },
-              {
-                thumbnail: {
-                  src: '/images/splashImages/speech.jpg',
-                  alt: 'Mayor speech',
-                  layout: 'fill',
+                {
+                  thumbnail: {
+                    src: '/images/splashImages/speech.jpg',
+                    alt: 'Mayor speech',
+                    layout: 'fill',
+                  },
+                  title: 'Mayor speaks on supporting local children',
+                  videoId: 'Yp5KDg6mx_Q'
                 },
-                title: 'Mayor speaks on supporting local children',
-                videoId: 'Yp5KDg6mx_Q'
-              },
-            ]}
-          />
+              ]}
+            />
+          </div>
           <PanelRow
             image={{
               src: '/images/splashImages/volunteer.jpg',

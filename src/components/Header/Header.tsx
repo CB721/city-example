@@ -93,7 +93,25 @@ function Header() {
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+                '& .MuiList-root': {
+                  backgroundColor: 'var(--background)',
+                  borderRadius: '0.1rem',
+
+                  '& .MuiMenuItem-root': {
+                    borderBottom: '1px solid var(--primary)',
+
+                    '&:last-child': {
+                      borderBottom: 'none',
+                    },
+                  }
+                },
+                '& .MuiPaper-root': {
+                  backgroundColor: 'var(--background)',
+                  color: 'var(--primary)',
+                },
+              }}
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={() => navigateToPage(page)}>
@@ -107,7 +125,7 @@ function Header() {
             variant="h5"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href={Routes.Home}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },

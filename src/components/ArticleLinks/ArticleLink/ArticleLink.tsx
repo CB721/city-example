@@ -21,10 +21,10 @@ function ArticleLink({ icon, title, route }: ArticleLinkProps) {
   }
 
   return (
-    <div className="bg-primary text-background p-4 rounded flex justify-start items-start border border-gray-600 cursor-pointer">
+    <div className="group ease-in bg-primary hover:bg-background text-background hover:text-primary p-4 rounded flex justify-start items-start border border-gray-600 hover:border-primary cursor-pointer">
       {icon}
       <div className="ml-2">
-        <h2 className="text-lg text-text font-bold capitalize">{removeTerms(title)}</h2>
+        <h2 className="text-lg text-text group-hover:text-primary font-bold capitalize">{removeTerms(title)}</h2>
       </div>
     </div>
   );

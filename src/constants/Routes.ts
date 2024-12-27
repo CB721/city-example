@@ -6,4 +6,5 @@ export enum Routes {
   Jobs = '/jobs',
   Events = '/events',
   NotFound = '/404',
+  GovernmentMember = '/government-members',
 }
