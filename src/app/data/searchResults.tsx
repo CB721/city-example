@@ -237,8 +237,8 @@ export const searchResults: SearchResult[] = [
     title: "Senior Services and Programs ",
     route: Routes.Residents,
     icon: (
-      <div className="flex items-center justify-between max-w-min">
-        <ElderlyIcon />
+      <div className="relative max-w-min">
+        <ElderlyIcon className="absolute top-[2px] left-[-12px] text-secondary" />
         <ElderlyWomanIcon />
       </div>
     ),

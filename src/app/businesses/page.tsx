@@ -1,17 +1,16 @@
 import Carousel from "@/components/Carousel/Carousel";
-import PlaceIcon from '@mui/icons-material/Place';
 import { Routes } from "@/constants/Routes";
 import ArticleLinks from "@/components/ArticleLinks/ArticleLinks";
 import Overlay from "@/components/Carousel/Overlay/Overlay";
 
-export default function Residents() {
+export default function Businesses() {
   return (
     <div>
       <Carousel
         images={[
           {
-            src: '/images/pageHeaders/residents.jpg',
-            alt: 'Residents',
+            src: '/images/pageHeaders/businesses.jpg',
+            alt: 'Businesses',
             layout: 'fill',
             priority: true,
           }
@@ -19,15 +18,11 @@ export default function Residents() {
         hideSearch
         overlay={
           <Overlay
-            title='Support for Residents'
-            aside={{
-              title: 'Neighborhood Information',
-              icon: <PlaceIcon />
-            }}
+            title='Tools for Business'
           />
         }
       />
-      <ArticleLinks route={Routes.Residents} />
+      <ArticleLinks route={Routes.Businesses} />
     </div>
   )
 }

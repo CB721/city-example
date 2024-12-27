@@ -11,13 +11,14 @@ function ArticleLinks({ route }: ArticleLinksProps) {
   const residentArticles = searchResults.filter((result) => result.route === route);
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" className="bg-primary">
       <div className="grid grid-cols-1 tablet:grid-cols-3 gap-4 py-8">
         {residentArticles.map((article) => (
           <ArticleLink
             key={article.title}
             icon={article.icon}
             title={article.title}
+            route={article.route}
           />
         ))}
       </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import Image, { ImageProps } from 'next/legacy/image';
-import Container from '@mui/material/Container';
 import useInterval from '@/hooks/useInterval';
 import { useState, useEffect, ReactNode, useMemo } from 'react';
 import styles from './Carousel.module.css';
@@ -56,11 +55,9 @@ function Carousel({ images, disableSearch, hideSearch, overlay }: CarouselProps)
             </>
           )}
           {!!overlay && (
-            <div className='absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-background'>
-              <Container maxWidth="md" className='relative h-full w-full flex justify-start items-end py-8'>
-                {overlay}
-              </Container>
-            </div>
+            <>
+              {overlay}
+            </>
           )}
         </div>
       </div>

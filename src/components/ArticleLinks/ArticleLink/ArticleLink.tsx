@@ -1,18 +1,20 @@
+import { Routes } from "@/constants/Routes";
 import { ReactNode } from "react";
 
 interface ArticleLinkProps {
   icon: ReactNode;
   title: string;
+  route: Routes;
 }
 
-function ArticleLink({ icon, title }: ArticleLinkProps) {
+function ArticleLink({ icon, title, route }: ArticleLinkProps) {
   const removeTerms = (title: string) => {
     const arrThrough5 = Array.from(Array(5).keys()).slice(1);
-
-    let x = title.replaceAll('[term]', 'resident');
+    const pageName = route.split('/')[1];
+    let x = title.replaceAll('[term]', pageName === Routes.Businesses.split('/')[1] ? 'Business' : pageName);
 
     arrThrough5.forEach((num) => {
-      x = x.replaceAll(`[term${num}]`, 'residents');
+      x = x.replaceAll(`[term${num}]`, pageName);
     });
 
     return x;

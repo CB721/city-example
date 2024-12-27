@@ -17,7 +17,7 @@ function PanelRow({ image, header, description, callToAction }: PanelRowProps) {
       <div className='tablet:w-1/4 w-full py-4'>
         <Container maxWidth="xl">
           <h2 className='text-2xl font-bold text-center text-tertiary mb-2'>{header}</h2>
-          <p className='text-center text-secondary mb-1'>{description}</p>
+          <p className='text-center text-secondary mb-1 text-pretty'>{description}</p>
           <div className='mt-4 flex justify-center'>{callToAction}</div>
         </Container>
       </div>

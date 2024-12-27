@@ -29,7 +29,7 @@ export default function CardRow({ items, title }: CardRowProps) {
                   <div className='flex justify-center items-center mb-2'>{item.icon}</div>
                   <div>
                     <h3 className='text-tertiary text-center mb-1 text-lg font-bold'>{item.title}</h3>
-                    <p className='text-secondary text-center text-base'>{item.description}</p>
+                    <p className='text-secondary text-center text-base text-pretty'>{item.description}</p>
                   </div>
                 </CardContent>
               </Card>
