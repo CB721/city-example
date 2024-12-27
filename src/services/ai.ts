@@ -28,7 +28,7 @@ function fetchQTechResp(
   searchResults: SearchResult[]
 ): Promise<QTechAiResponse> {
   const randomDelay = Math.floor(Math.random() * 1000) + 1000;
-  const randomError = Math.random() > 0.5;
+  const randomError = Math.random() > 0.8;
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {

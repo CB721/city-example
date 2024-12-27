@@ -1,3 +1,5 @@
+'use client'
+
 import { SearchResult } from "@/app/data/searchResults";
 import Container from '@mui/material/Container';
 import Search from "../Search/Search";

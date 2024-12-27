@@ -27,7 +27,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const getAiResp = useCallback((query: string, searchResults: SearchResult[]) => {
-    const key = query.trim().toLowerCase();
+    const key = query?.trim().toLowerCase();
     if (aiCache[key]) {
       return aiCache[key];
     }
@@ -42,8 +42,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   }, [aiCache])
 
   useEffect(() => {
-    if (results.length > 0) {
-      getAiResp(value!, results);
+    if (results.length > 0 && !!value) {
+      getAiResp(value, results);
     }
   }, [getAiResp, results, value]);
 
