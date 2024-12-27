@@ -10,9 +10,10 @@ import AiResponse from "../AI/AiResponse/AiResponse";
 export interface SearchResultsProps {
   results: SearchResult[];
   aiRes: QTechAiResponse | null;
+  query: string;
 }
 
-function SearchResults({ results, aiRes }: SearchResultsProps) {
+function SearchResults({ results, aiRes, query }: SearchResultsProps) {
   return (
     <Container maxWidth="xl" className="bg-primary">
       <div className="p-4 min-h-[50vh]">
@@ -27,6 +28,7 @@ function SearchResults({ results, aiRes }: SearchResultsProps) {
             key={result.title}
             title={result.title}
             description={result.description}
+            query={query}
           />
         ))}
       </div>

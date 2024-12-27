@@ -63,7 +63,7 @@ export default function Home() {
         disableSearch={!!value && value.length > 3}
       />
       {resultsReady ? (
-        <SearchResults results={results} aiRes={!!value ? aiCache[value?.trim().toLowerCase()] || null : null} />
+        <SearchResults results={results} aiRes={!!value ? aiCache[value?.trim().toLowerCase()] || null : null} query={value || ''} />
       ) : (
         <>
           <CardRow

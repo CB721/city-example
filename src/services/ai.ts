@@ -44,16 +44,16 @@ function fetchQTechResp(
       while(j < randomNumOfIterations) {
         const descriptions = searchResults
           .map((result) => result.description.split(" "))
-          .sort((a, b) => a.length - b.length);
+          .sort((a, b) => b.length - a.length)
 
         for (let i = 0; i < descriptions[0].length; i++) {
           const randomDescriptionIndex = Math.floor(
             Math.random() * descriptions.length
           );
-          let randomWord = descriptions[randomDescriptionIndex][i];
+          let randomWord = descriptions[randomDescriptionIndex][i] || '';
           if (
             output[output.length - 2] === "." &&
-            randomWord[randomWord.length - 1] === "."
+            randomWord[randomWord?.length - 1] === "."
           ) {
             randomWord = randomWord.slice(0, randomWord.length - 1);
           }
