@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FilterDramaIcon from '@mui/icons-material/FilterDrama';
 import { useState, MouseEvent, useEffect } from 'react';
 import { Routes } from '@/constants/Routes';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 const pages = [Routes.Residents, Routes.Businesses, Routes.Visitors, Routes.Jobs, Routes.Events];
 

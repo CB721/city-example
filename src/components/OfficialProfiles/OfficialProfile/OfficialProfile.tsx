@@ -20,10 +20,10 @@ function OfficialProfile({ profile }: OfficialProfileProps) {
         alt={profile.name}
         width={176}
         height={176}
-        className='rounded-full w-44 h-44 mb-4 object-cover'
+        className='rounded-full w-44 h-44 mb-4 object-cover mx-auto'
       />
-      <h2 className='text-xl font-semibold'>{profile.name}</h2>
-      <h3 className='text-lg'>{profile.title}</h3>
+      <h2 className='text-xl font-semibold max-w-fit mx-auto'>{profile.name}</h2>
+      <h3 className='text-lg max-w-fit mx-auto'>{profile.title}</h3>
     </div>
   )
 }

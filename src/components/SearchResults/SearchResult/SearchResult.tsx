@@ -1,6 +1,10 @@
+'use client'
+
+import { SearchResult as Result } from "@/app/data/searchResults";
+import { useRouter } from "next/navigation";
+
 export interface SearchResultProps {
-  title: string;
-  description: string;
+  result: Result;
   query: string;
 }
 
@@ -16,20 +20,27 @@ function addEmphasis(phrase: string, query: string) {
     .join(" ");
 }
 
-function SearchResult({ title, description, query }: SearchResultProps) {
+function SearchResult({ result, query }: SearchResultProps) {
+  const router = useRouter();
+
   return (
-    <div className="rounded w-full h-auto border border-gray-600 mb-3 py-2 px-4 cursor-pointer">
+    <div 
+    className="rounded w-full h-auto border border-gray-600 mb-3 py-2 px-4 cursor-pointer"
+    onClick={() => {
+      router.push(result.route);
+    }}
+    >
       <h2 
       className="text-lg text-tertiary truncate underline capitalize"  
       dangerouslySetInnerHTML={{
         __html: 
-        `${addEmphasis(title, query).trim()} | Cloud City`
+        `${addEmphasis(result.title, query).trim()} | Cloud City`
       }}
       />
       <p
         className="text-base text-secondary truncate"
         dangerouslySetInnerHTML={{
-          __html: addEmphasis(description, query).trim()
+          __html: addEmphasis(result.description, query).trim()
         }} 
         />
     </div>

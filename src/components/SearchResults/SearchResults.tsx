@@ -36,8 +36,7 @@ function SearchResults({ results, aiRes, query }: SearchResultsProps) {
         {results.slice(0, numOfResults).map((result) => (
           <SearchResultUI
             key={result.title}
-            title={result.title}
-            description={result.description}
+            result={result}
             query={query}
           />
         ))}
