@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CursorIcon from '../../Icons/Cursor'
 import { QTechAiResponse } from "@/services/ai";
 import styles from './AiResponse.module.css';
@@ -8,17 +8,27 @@ import useInterval from "@/hooks/useInterval";
 
 export interface AiResponseUIProps {
   aiRes: QTechAiResponse;
+  query: string;
 }
 
-function AiResponse({ aiRes }: AiResponseUIProps) {
+function AiResponse({ aiRes, query }: AiResponseUIProps) {
+  const [replacedOutput, setReplacedOutput] = useState<string>('');
   const [output, setOutput] = useState<string>('');
   const [i, setI] = useState<number>(0);
 
   const interval = (aiRes.timeToComplete / aiRes.output.length) + Math.random() * 100;
 
+  useEffect(() => {
+    let x = aiRes.output.replaceAll('[term]', query);
+    Array.from({ length: 4 }).forEach((_, i) => {
+      x = x.replaceAll(`[term${i + 2}]`, query);
+    });
+    setReplacedOutput(x);
+  }, [aiRes, query]);
+
   useInterval(() => {
-    if (output.length < aiRes.output.length) {
-      setOutput((prevOutput) => prevOutput + aiRes.output[i]);
+    if (output.length < replacedOutput.length && replacedOutput.length === aiRes.output.length) {
+      setOutput((prevOutput) => prevOutput + replacedOutput[i]);
       setI((prevI) => prevI + 1);
     }
   }, interval);
@@ -38,9 +48,13 @@ function AiResponse({ aiRes }: AiResponseUIProps) {
               <CursorIcon className={styles.cursor} />
             )}
           </span>
-          {finishedTyping &&
-            <p className="text-sm text-secondary text-right mt-2">Time to complete: ~{timeToComplete} second{timeToComplete > 1 ? 's' : ''}</p>
-          }
+          <p className={"text-sm text-secondary min-h-5 text-right mt-2"}>
+            {finishedTyping &&
+              <span className={styles.textFocusIn}>
+                Time to complete: ~{timeToComplete} second{timeToComplete > 1 ? 's' : ''}
+              </span>
+            }
+          </p>
         </>
       ) : (
         <p className="text-base bg-red-600 p-1 max-w-fit text-primary">{aiRes.error}</p>
