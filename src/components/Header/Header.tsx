@@ -12,12 +12,16 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import FilterDramaIcon from '@mui/icons-material/FilterDrama';
 import { useState, MouseEvent, useEffect } from 'react';
+import { Routes } from '@/constants/Routes';
+import { useRouter } from 'next/navigation'
 
-const pages = ['Residents', 'Businesses', 'Visitors', 'Jobs', 'Events'];
+const pages = [Routes.Residents, Routes.Businesses, Routes.Visitors, Routes.Jobs, Routes.Events];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [isClient, setIsClient] = useState(false);
+
+  const router = useRouter()
 
   useEffect(() => {
     setIsClient(true);
@@ -30,6 +34,11 @@ function Header() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const navigateToPage = (page: Routes) => {
+    router.push(page);
+    handleCloseNavMenu();
+  }
 
   if (!isClient) {
     return (
@@ -46,7 +55,7 @@ function Header() {
             variant="h6"
             noWrap
             component="a"
-            href="#good-work-here"
+            href={Routes.Home}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -87,8 +96,8 @@ function Header() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center', color: 'var(--primary)' }}>{page}</Typography>
+                <MenuItem key={page} onClick={() => navigateToPage(page)}>
+                  <Typography sx={{ textAlign: 'center', color: 'var(--primary)', textTransform: 'capitalize' }}>{page.slice(1)}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -116,10 +125,10 @@ function Header() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'var(--primary)', display: 'block' }}
+                onClick={() => navigateToPage(page)}
+                sx={{ my: 2, color: 'var(--primary)', display: 'block', }}
               >
-                {page}
+                {page.slice(1)}
               </Button>
             ))}
           </Box>

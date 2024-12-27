@@ -11,7 +11,6 @@ import FoodBankIcon from '@mui/icons-material/FoodBank';
 import PanelRow from '@/components/PanelRow/PanelRow';
 import News from '@/components/News/News';
 import { Button } from '@mui/material';
-import Footer from '@/components/Footer/Footer';
 import { useSearch } from '@/contexts/SearchContext';
 import SearchResults from '@/components/SearchResults/SearchResults';
 
@@ -163,7 +162,6 @@ export default function Home() {
           />
         </>
       )}
-      <Footer />
     </div>
   );
 }
