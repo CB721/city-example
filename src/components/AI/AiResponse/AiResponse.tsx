@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useState } from "react";
+import Image from 'next/image';
+
 import CursorIcon from '../../Icons/Cursor'
 import { QTechAiResponse } from "@/services/ai";
 import styles from './AiResponse.module.css';
@@ -38,7 +40,16 @@ function AiResponse({ aiRes, query }: AiResponseUIProps) {
 
   return (
     <div className="rounded max-w-full h-auto bg-background text-primary mb-3 py-2 px-4">
-      <h3 className="text-lg text-tertiary">Lando AI Response</h3>
+      <div className="flex justify-start items-center">
+        <Image
+          src="/images/profiles/lando.jpg"
+          alt="Lando AI"
+          width={28}
+          height={28}
+          className='rounded-full w-7 h-7 object-cover mr-2'
+        />
+        <h3 className="text-lg text-tertiary">Lando AI Response</h3>
+      </div>
       {!aiRes.error ? (
         <>
           {aiRes.intro && <p className={`text-base text-secondary mb-2 ${styles.textFocusIn}`}><em>{aiRes.intro.trim()}</em></p>}

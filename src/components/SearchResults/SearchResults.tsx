@@ -40,7 +40,7 @@ function SearchResults({ results, aiRes, query }: SearchResultsProps) {
             query={query}
           />
         ))}
-        <p className="text-text text-base">Results: {numOfResults} of {results.length}</p>
+        <p className="text-text text-base">Results: {Math.min(numOfResults, results.length)} of {results.length}</p>
         {results.length > numOfResults && (
           <ButtonGroup className="mt-4">
             <Button
