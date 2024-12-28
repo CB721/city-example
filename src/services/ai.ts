@@ -24,6 +24,109 @@ const introPhrases = [
   "I searched all the archives and found this: \n",
 ];
 
+const starWarsWords = [
+  "Alderaan",
+  "Anakin",
+  "Darth",
+  "Vader",
+  "Tatooine",
+  "Luke",
+  "Leia",
+  "Obi-Wan",
+  "Kenobi",
+  "Sith",
+  "Jedi",
+  "TheForce",
+  "Rebel",
+  "Empire",
+  "Han",
+  "Solo",
+  "Chewbacca",
+  "Millennium Falcon",
+  "R2-D2",
+  "C-3PO",
+  "Stormtrooper",
+  "X-Wing",
+  "TIE fighter",
+  "Death Star",
+  "Boba Fett",
+  "Mace Windu",
+  "Qui-Gon",
+  "Jinn",
+  "Padmé",
+  "Amidala",
+  "Jar Jar",
+  "Binks",
+  "Darth Maul",
+  "Count Dooku",
+  "Grievous",
+  "Yoda",
+  "Sarlacc",
+  "Womp Rat",
+  "Coruscant",
+  "Endor",
+  "Dagobah",
+  "Mustafar",
+  "Hoth",
+  "Naboo",
+  "Kashyyyk",
+  "Bespin",
+  "Jakku",
+  "Crait",
+  "Rogue One",
+  "Ahsoka",
+  "Sabine",
+  "Ezra",
+  "Maul",
+  "Kylo Ren",
+  "Snoke",
+  "Rey",
+  "Finn",
+  "Poe",
+  "BB-8",
+  "Resistance",
+  "First Order",
+  "Clone Trooper",
+  "Reylo",
+  "Mandalorian",
+  "Bounty Hunter",
+  "Jango Fett",
+  "Clone Wars",
+  "Fennec Shand",
+  "Gungan",
+  "Sith Lord",
+  "Moff",
+  "Palpatine",
+  "Chewie",
+  "Lobot",
+  "Yavin",
+  "Wookiee",
+  "Jabba",
+  "Vulpter",
+  "Sith Academy",
+  "Holocron",
+  "Ewok",
+  "Droid",
+  "Hyperspace",
+  "Bespin",
+  "Togruta",
+  "Togruta",
+  "TIE",
+  "Porg",
+  "Nightsister",
+  "The Old Republic",
+  "Dathomir",
+  "Luminara",
+  "Darth Revan",
+  "Lightsaber",
+  "Kessel run",
+  "Geonosis",
+  "Rogue Squadron",
+  "Sith Empire",
+  "Vader Down",
+  "Senate",
+];
+
 function fetchQTechResp(
   searchResults: SearchResult[]
 ): Promise<QTechAiResponse> {
@@ -41,17 +144,17 @@ function fetchQTechResp(
       const randomNumOfIterations = Math.floor(Math.random() * 5) + 1;
       let j = 0;
 
-      while(j < randomNumOfIterations) {
+      while (j < randomNumOfIterations) {
         const descriptions = searchResults
           .map((result) => result.description.split(" "))
-          .sort((a, b) => a.length - b.length)
+          .sort((a, b) => a.length - b.length);
 
         for (let i = 0; i < descriptions[0].length; i++) {
           const randomDescriptionIndex = Math.floor(
             Math.random() * descriptions.length
           );
-          
-          let randomWord = descriptions[randomDescriptionIndex][i] || '';
+
+          let randomWord = descriptions[randomDescriptionIndex][i] || "";
 
           if (
             output[output.length - 2] === "." &&
@@ -63,6 +166,13 @@ function fetchQTechResp(
           // if (randomWord[0] === randomWord[0].toUpperCase() && output[output.length - 2] !== "."  && output[output.length - 1] !== "," && output.length > 0) {
           //   output += ". ";
           // }
+          const randomStarWarsWord =
+            starWarsWords[Math.floor(Math.random() * starWarsWords.length)];
+          const addRandomStarWarsWord = Math.random() > 0.9;
+          if (addRandomStarWarsWord) {
+            output += randomStarWarsWord + " ";
+          }
+
           output += randomWord + " ";
         }
 
@@ -85,9 +195,7 @@ function fetchQTechResp(
       resolve({
         output,
         timeToComplete: randomDelay,
-        intro: introPhrases[
-          Math.floor(Math.random() * introPhrases.length)
-        ]
+        intro: introPhrases[Math.floor(Math.random() * introPhrases.length)],
       });
     }, randomDelay);
   });

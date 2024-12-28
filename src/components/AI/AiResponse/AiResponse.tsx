@@ -68,7 +68,7 @@ function AiResponse({ aiRes, query }: AiResponseUIProps) {
           </p>
         </>
       ) : (
-        <p className="text-base bg-red-600 p-1 max-w-fit text-primary">{aiRes.error}</p>
+        <p className="text-base bg-red-600 p-1 max-w-fit text-primary mt-2">{aiRes.error}</p>
       )}
       <p className="text-sm text-secondary text-right">QTech AI Summary <em>Beta</em></p>
     </div>
