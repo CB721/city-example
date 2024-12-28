@@ -16,7 +16,7 @@ function AiResponse({ aiRes, query }: AiResponseUIProps) {
   const [output, setOutput] = useState<string>('');
   const [i, setI] = useState<number>(0);
 
-  const interval = (aiRes.timeToComplete / aiRes.output.length) + Math.random() * 100;
+  const interval = (aiRes.timeToComplete / aiRes.output.length) + (Math.random() * 55);
 
   useEffect(() => {
     let x = aiRes.output.replaceAll('[term]', query);
