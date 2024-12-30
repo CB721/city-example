@@ -1,6 +1,6 @@
 .textFocusIn {
-	-webkit-animation: TextFocusIn 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-	        animation: TextFocusIn 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	-webkit-animation: TextFocusIn 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: TextFocusIn 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
 .cursor {

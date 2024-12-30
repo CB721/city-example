@@ -1,7 +1,8 @@
-import { SearchResult } from "@/app/data/searchResults";
+import { SearchResult, searchResults } from "@/app/data/searchResults";
 
 export interface QTechAiResponse {
   output: string;
+  output2?: string;
   timeToComplete: number;
   error?: string;
   intro?: string;
@@ -127,8 +128,99 @@ const starWarsWords = [
   "Senate",
 ];
 
+function constructQueryResults(query: string): string {
+  const queryTerms = query.split(" ");
+
+  const results: SearchResult[] = [];
+
+  queryTerms.forEach((term) => {
+    const termCountInDescription = searchResults
+      .map((result, index) => {
+        const description = result.description.toLowerCase();
+        if (description.includes(term)) {
+          return { [index]: description.split(term).length - 1 };
+        } else {
+          return { [index]: 0 };
+        }
+      })
+      .filter((result) => Object.values(result)[0] > 0)
+      .sort((a, b) => {
+        return Object.values(b)[0] - Object.values(a)[0];
+      })
+      .map((count: { [key: string]: number }) => {
+        return searchResults[parseInt(Object.keys(count)[0])];
+      });
+
+    results.push(...termCountInDescription);
+  });
+
+  return constructOutput(results);
+}
+
+function constructOutput(
+  relatedSearchResults: SearchResult[],
+  includeRandomStarWarsWord?: boolean
+): string {
+  let output2 = "";
+
+  const randomNumOfIterations = Math.floor(Math.random() * 5) + 1;
+  let j = 0;
+
+  while (j < randomNumOfIterations) {
+    const descriptions = relatedSearchResults
+      .map((result) => result.description.split(" "))
+      .sort((a, b) => a.length - b.length);
+
+    for (let i = 0; i < descriptions[0]?.length; i++) {
+      const randomDescriptionIndex = Math.floor(
+        Math.random() * descriptions.length
+      );
+
+      let randomWord = descriptions[randomDescriptionIndex][i] || "";
+
+      if (
+        output2[output2.length - 2] === "." &&
+        randomWord[randomWord?.length - 1] === "."
+      ) {
+        randomWord = randomWord.slice(0, randomWord.length - 1);
+      }
+      // // if randomWord is capital, add a period and space before it
+      // if (randomWord[0] === randomWord[0].toUpperCase() && output2[output2.length - 2] !== "."  && output2[output2.length - 1] !== "," && output2.length > 0) {
+      //   output2 += ". ";
+      // }
+      const randomStarWarsWord =
+        starWarsWords[Math.floor(Math.random() * starWarsWords.length)];
+      const addRandomStarWarsWord = Math.random() > 0.9;
+      if (addRandomStarWarsWord && includeRandomStarWarsWord) {
+        output2 += randomStarWarsWord + " ";
+      }
+
+      output2 += randomWord + " ";
+    }
+
+    output2 = output2.trim();
+
+    // if there is a comma, don't end there
+    if (output2[output2.length - 1] === ",") {
+      output2 += " ";
+      continue;
+    }
+
+    // add punctuation
+    if (output2[output2.length - 1] !== ".") {
+      output2 += ". ";
+    }
+
+    j++;
+  }
+
+  return output2;
+}
+
 function fetchQTechResp(
-  searchResults: SearchResult[]
+  relatedSearchResults: SearchResult[],
+  query: string,
+  includeIntro?: boolean
 ): Promise<QTechAiResponse> {
   const randomDelay = Math.floor(Math.random() * 1000) + 1000;
   const randomError = Math.random() > 0.8;
@@ -139,63 +231,13 @@ function fetchQTechResp(
         reject("Error fetching results");
       }
 
-      let output = "";
-
-      const randomNumOfIterations = Math.floor(Math.random() * 5) + 1;
-      let j = 0;
-
-      while (j < randomNumOfIterations) {
-        const descriptions = searchResults
-          .map((result) => result.description.split(" "))
-          .sort((a, b) => a.length - b.length);
-
-        for (let i = 0; i < descriptions[0].length; i++) {
-          const randomDescriptionIndex = Math.floor(
-            Math.random() * descriptions.length
-          );
-
-          let randomWord = descriptions[randomDescriptionIndex][i] || "";
-
-          if (
-            output[output.length - 2] === "." &&
-            randomWord[randomWord?.length - 1] === "."
-          ) {
-            randomWord = randomWord.slice(0, randomWord.length - 1);
-          }
-          // // if randomWord is capital, add a period and space before it
-          // if (randomWord[0] === randomWord[0].toUpperCase() && output[output.length - 2] !== "."  && output[output.length - 1] !== "," && output.length > 0) {
-          //   output += ". ";
-          // }
-          const randomStarWarsWord =
-            starWarsWords[Math.floor(Math.random() * starWarsWords.length)];
-          const addRandomStarWarsWord = Math.random() > 0.9;
-          if (addRandomStarWarsWord) {
-            output += randomStarWarsWord + " ";
-          }
-
-          output += randomWord + " ";
-        }
-
-        output = output.trim();
-
-        // if there is a comma, don't end there
-        if (output[output.length - 1] === ",") {
-          output += " ";
-          continue;
-        }
-
-        // add punctuation
-        if (output[output.length - 1] !== ".") {
-          output += ". ";
-        }
-
-        j++;
-      }
-
       resolve({
-        output,
+        output: constructQueryResults(query),
+        output2: constructOutput(relatedSearchResults, true),
         timeToComplete: randomDelay,
-        intro: introPhrases[Math.floor(Math.random() * introPhrases.length)],
+        intro: includeIntro
+          ? introPhrases[Math.floor(Math.random() * introPhrases.length)]
+          : undefined,
       });
     }, randomDelay);
   });

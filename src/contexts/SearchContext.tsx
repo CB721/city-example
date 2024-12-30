@@ -32,7 +32,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       return aiCache[key];
     }
 
-    fetchQTechResp(searchResults)
+    fetchQTechResp(searchResults, query, Object.keys(aiCache).length === 0)
       .then((response) => {
         setAiCache({ ...aiCache, [key]: response });
       })
